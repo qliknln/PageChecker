@@ -1,0 +1,49 @@
+[
+  {
+    "LogFile": "c:/PageStatus/PageCheckLog.txt"
+  },
+  [
+    {
+      "pageUrl": "http://sensetest.qliktech.com/hub",
+      "elemClass":"hub-item-area",
+      "elementWait":120,
+      "title":"Sense test"
+    },
+    {
+      "pageUrl": "http://sense.qliktech.com/hub",
+      "elemClass":"hub-item-area",
+      "elementWait":120,
+      "title":"Sense prod"
+    },
+	{
+      "pageUrl": "https://52.48.5.86/hub",
+      "elemClass":"hub-item-area",
+      "elementWait":120,
+      "title":"Sense demo EU"
+    },
+	{
+      "pageUrl": "https://52.201.80.222/hub",
+      "elemClass":"hub-item-area",
+      "elementWait":120,
+      "title":"Sense demo US"
+    },
+    {
+      "pageUrl": "https://pubtest.qliktech.com/",
+      "elemClass":"lastUpdated",
+      "elementWait":30,
+      "title":"Qv test"
+    },
+    {
+      "pageUrl": "https://pubdev.qliktech.com/",
+      "elemClass":"lastUpdated",
+      "elementWait":30,
+      "title":"Qv dev"
+    },
+    {
+      "pageUrl": "https://pub.qliktech.com/",
+      "elemClass":"lastUpdated",
+      "elementWait":30,
+      "title":"Qv prod"
+    }
+  ]
+]
