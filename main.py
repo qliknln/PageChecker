@@ -8,10 +8,11 @@ import json, os
 
 
 class PageChecker(object):
-    def __init__(self, url, elem_class, wait_time, log_file, title):
+    def __init__(self, url, wait_time, log_file, title, elem_class='', elem_id= ''):
         self.file_str = log_file
         self.url = url
         self.elem_class = elem_class
+        self.elem_id = elem_id
         self.wait_time = wait_time
         self.title = title
 
@@ -23,7 +24,10 @@ class PageChecker(object):
         try:
             start = time()
             wait = WebDriverWait(driver, self.wait_time)
-            element = wait.until(ec.presence_of_element_located((By.CLASS_NAME, self.elem_class)))
+            if self.elem_class != '':
+                element = wait.until(ec.presence_of_element_located((By.CLASS_NAME, self.elem_class)))
+            else:
+                element = wait.until(ec.presence_of_element_located((By.ID, self.elem_id)))
             stop = time()
             assert element is not None, 'Page not properly loaded'
             with open(self.file_str, 'a') as f:
@@ -31,7 +35,7 @@ class PageChecker(object):
         except:
             with open(self.file_str, 'a') as f:
                 f.write(strftime('%Y-%m-%d %H:%M:%S', localtime()) + ';' + self.url + ';' + self.title + ';Down;' + 'N/A\r\n')
-            MyMail.send_mail(self.url + ' Down!', "Sorry for spamming!...still testing", 'qlikatqlik@qlik.com')
+            #MyMail.send_mail(self.url + ' Down!', "Could not access the access point/hub for: " + self.title, 'qlikatqlik@qlik.com')
         finally:
             driver.quit()
 
@@ -41,7 +45,7 @@ if __name__ == '__main__':
     with open(conf_file) as json_data:
         d = json.load(json_data)
         for obj in d[1]:
-            pc = PageChecker(obj["pageUrl"], obj["elemClass"], obj["elementWait"], d[0]['LogFile'], obj['title'])
+            pc = PageChecker(obj["pageUrl"], obj["elementWait"], d[0]['LogFile'], obj['title'], obj["elemClass"], obj["elemId"])
             pc.check_page()
             sleep(5) # Wait 5 before testing next page
 
