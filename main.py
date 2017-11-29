@@ -35,7 +35,7 @@ class PageChecker(object):
         except:
             with open(self.file_str, 'a') as f:
                 f.write(strftime('%Y-%m-%d %H:%M:%S', localtime()) + ';' + self.url + ';' + self.title + ';Down;' + 'N/A\r\n')
-            #MyMail.send_mail(self.url + ' Down!', "Could not access the access point/hub for: " + self.title, 'qlikatqlik@qlik.com')
+            MyMail.send_mail(self.url + ' Down!', "Could not access the access point/hub for: " + self.title, 'qlikatqlik@qlik.com')
         finally:
             driver.quit()
 
